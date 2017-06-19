@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	layout:decorate="~{layout/LayoutPrincipal}"
+	xmlns:brewer="http://brewer.algaworks.com">
+
+<head>
+<title>Cadastro de Avaliador</title>
+<th:block layout:fragment="css-extra">
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/stylesheets/multiselect/bootstrap-select.min.css}" />
+	<link rel="stylesheet" type="text/css"
+		th:href="@{/stylesheets/pesquisa/bootstrap-chosen.css}" />
+
+</th:block>
+</head>
+
+<section layout:fragment="conteudo">
+
+	<div class="row bg-title">
+		<!-- .page title -->
+		<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+			<h4 class="page-title">Cadastro de Avaliador</h4>
+		</div>
+		<!-- /.page title -->
+		<!-- .breadcrumb -->
+		<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+			<button
+				class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20">
+				<i class="ti-settings text-white"></i>
+			</button>
+			<!-- <a href="javascript: void(0);" target="_blank"
+				class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Buy
+				Admin Now</a> -->
+			<ol class="breadcrumb">
+				<li><a th:href="@{/avaliadores}">Avaliadores</a></li>
+				<li class="active">Cadastro de Avaliador</li>
+			</ol>
+		</div>
+		<!-- /.breadcrumb -->
+	</div>
+	<!-- .row -->
+	<div class="row">
+		<div class="col-md-12">
+			<div class="white-box">
+
+				<div class="container-fluid">
+
+					<form method="POST" th:object="${membro}"
+						th:action="@{/avaliadores}">
+						<brewer:message />
+
+
+						<input type="hidden" th:field="*{id}" /> <input type="hidden"
+							th:field="*{criadopor}" /> <input type="hidden"
+							th:field="*{criadoem}" />
+						<div class="row">
+							<div class="form-group  col-sm-4  bw-required"
+								brewer:classforerror="pessoadef">
+								<label for="membro" class="control-label">Membro da
+									Comissão</label> <select data-placeholder="Pesquisar"
+									th:field="*{pessoadef}" id="membro"
+									class="chosen-select form-control" tabindex="7">
+									<option value=""></option>
+									<option th:each="pessoa : ${pessoas}" th:value="${pessoa.id}"
+										th:text="|${pessoa.matricula} - ${pessoa.nome}|"></option>
+
+								</select>
+							</div>
+
+							<div class="form-group  col-sm-4">
+								<label for="telefone">CREF</label> <input type="text"
+									class="form-control" id="cref" th:field="*{cref}" />
+							</div>
+							<div class="form-group  col-sm-4"
+								brewer:classforerror="escolaridade">
+								<label for="escolaridade" class="control-label">Escolaridade</label>
+								<select id="escolaridade" class="form-control"
+									th:field="*{escolaridade}" name="escolaridade">
+									<option value="">Selecione uma opção</option>
+									<option th:each="escolaridade : ${escolaridades}"
+										th:value="${escolaridade}" th:text="${escolaridade.descricao}"></option>
+								</select>
+							</div>
+						</div>
+
+
+						<button type="submit" class="btn  btn-primary">Salvar</button>
+						<a class="btn  btn-primary" th:href="@{/avaliadores}">Voltar</a>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<th:block layout:fragment="javascript-extra">
+	<script th:src="@{/javascripts/pesquisa/chosen.jquery.min.js}"></script>
+	<script th:src="@{/javascripts/multiselect/bootstrap-select.js}"></script>
+	<script>
+		$('.chosen-select').chosen();
+	</script>
+</th:block>
+
+</html>

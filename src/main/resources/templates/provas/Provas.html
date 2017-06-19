@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{ampleadmin/layout/LayoutPrincipal}"
+	xmlns:brewer="http://brewer.algaworks.com"
+	xmlns:data="http://www.thymeleaf.org/extras/data">
+
+<head>
+<title>Pesquisa de Provas</title>
+<th:block layout:fragment="css-extra">
+	<!-- 	<link rel="stylesheet" type="text/css" -->
+	<!-- 		th:href="@{/stylesheets/datatable/dataTables.bootstrap.min.css}" /> -->
+	<link
+		th:href="@{../plugins/bower_components/datatables/jquery.dataTables.min.css}"
+		rel="stylesheet" type="text/css" />
+	<link
+		th:href="@{https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css}"
+		rel="stylesheet" type="text/css" />
+
+</th:block>
+</head>
+
+<body>
+	<section layout:fragment="conteudo">
+		<!-- <div layout:include="MensagemGeral"></div> -->
+		<div class="row bg-title">
+			<!-- .page title -->
+			<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+				<h4 class="page-title">Provas</h4>
+			</div>
+			<!-- /.page title -->
+			<!-- .breadcrumb -->
+			<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+				<button
+					class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20">
+					<i class="ti-settings text-white"></i>
+				</button>
+				<a th:href="@{/provas/novo}"
+					class="btn btn-primary pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Nova
+					Prova</a>
+				<ol class="breadcrumb">
+					<li><a th:href="@{/}">Painel Principal</a></li>
+					<li class="active">Provas</li>
+				</ol>
+			</div>
+			<!-- /.breadcrumb -->
+		</div>
+		<!-- .row -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="white-box">
+
+					<div class="container-fluid">
+
+						<div class="table-responsive">
+							<table id="example"
+								class="table table-bordered table-striped table-condensed"
+								cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>Id</th>
+										<th>Nome</th>
+										<th>Tipo Avaliação</th>
+										<th>Descrição</th>
+										<th></th>
+
+
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="prova : ${provas}">
+										<td th:text="${prova?.id}">1</td>
+										<td th:text="${prova?.nome}">Nome</td>
+										<td th:text="${prova?.tipo.descricao}">Tipo</td>
+										<td th:text="${prova?.descricao}">descricao</td>
+										<td class="text-center"><a class="btn btn-link btn-xs"
+											th:href="@{/provas/{id}(id=${prova.id})}" title="Editar"
+											rel="tooltip" data-placement="top"> <span
+												class="glyphicon glyphicon-pencil"></span>
+										</a> <a class="btn btn-link btn-xs" data-toggle="modal"
+											data-target="#myModalExclusao"
+											th:attr="data-id=${prova.id}, data-nome=${prova.nome}"
+											title="Excluir" rel="tooltip" data-placement="top"> <span
+												class="glyphicon glyphicon-remove"></span>
+										</a></td>
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="myModalExclusao" tabindex="-1"
+			data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+				<form
+					th:attr="data-url-base=@{/provas/delete/}, data-tipo='a pessoa '"
+					method="get">
+
+
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Você tem certeza?</h4>
+						</div>
+
+						<div class="modal-body">
+							<span>Tem certeza que deseja apagar a prova?</span>
+						</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+							<button type="submit" class="btn btn-primary">Excluir</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<th:block layout:fragment="javascript-extra">
+		<script th:src="@{/javascripts/bpchoque.js}"></script>
+		<!-- <script th:src="@{/javascripts/datatable/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/javascripts/datatable/dataTables.bootstrap.min.js}"></script> -->
+		<script
+			th:src="@{../plugins/bower_components/datatables/jquery.dataTables.min.js}"></script>
+
+		<script th:src="@{/javascripts/datatable/iniciaAndTraduz.js}"></script>
+	</th:block>
+</body>
+</html>
