@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 	
 <body>
- <nav class="navbar navbar-default navbar-static-top m-b-0" th:fragment="navbar">
+ <nav class="navbar navbar-default navbar-static-top m-b-0" th:fragment="navbar2">
             <div class="navbar-header">
                 <!-- Toggle icon for mobile view -->
                 <div class="top-left-part">
@@ -120,7 +120,7 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="#"><i class="ti-settings"></i> Configurações de Conta</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a th:href="@{/logout}"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                         <!-- /.dropdown-user -->
                     </li>

@@ -62,8 +62,7 @@ public class OpmOrgaoController {
 			return CADASTRO_OPM;
 		}
 		
-		opm.setNome(opm.getNome().toUpperCase());
-		opm.setNome(opm.getLocalizacao().toUpperCase());
+		
 		opm.setAtualizadoem(LocalDateTime.now());
 		opm.setAtualizadopor(usuarioSistema.getUsername());
 		

@@ -12,7 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -43,6 +44,7 @@ public class OpmOrgao{
 	
 	@Column(name="localizacao", nullable=true, length=60)
 	private String localizacao;
+	
 	@NotNull(message="Escolha um tipo!")
 	@Enumerated(EnumType.STRING)
 	private TipoOpm tipo;
@@ -77,7 +79,13 @@ public class OpmOrgao{
 		}
 	}
 	
-	
+	@PrePersist
+	@PreUpdate
+	private void prePersistUpdate() {
+		nome = nome.toUpperCase();
+		localizacao = localizacao.toUpperCase();
+
+	}
 	
 	
 }

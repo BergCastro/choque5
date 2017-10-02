@@ -55,9 +55,9 @@ public class DashboardController {
 	
 	@GetMapping("/")
 	public ModelAndView dashboard() {
-		ModelAndView mv = new ModelAndView("Dashboard");
+		ModelAndView mv = new ModelAndView("dashboard/Dashboard");
 		
-		mv.addObject("vendasNoAno", vendas.valorTotalNoAno());
+		/*mv.addObject("vendasNoAno", vendas.valorTotalNoAno());
 		mv.addObject("vendasNoMes", vendas.valorTotalNoMes());
 		mv.addObject("ticketMedio", vendas.valorTicketMedioNoAno());
 		
@@ -67,7 +67,7 @@ public class DashboardController {
 		mv.addObject("testesIndividuais", testesIndividuais.count());
 		mv.addObject("pessoasAvaliadas", calculaPessoasAvaliadas());
 		mv.addObject("doacoes", doacaoRepository.count());
-		mv.addObject("avaliadores", avaliadorRepository.count());
+		mv.addObject("avaliadores", avaliadorRepository.count());*/
 		return mv;
 		
 		

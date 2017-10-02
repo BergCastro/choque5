@@ -11,7 +11,7 @@ public class SegurancaController {
 
 	@GetMapping("/login")
 	public ModelAndView login(@AuthenticationPrincipal User user) {
-		ModelAndView mv = new ModelAndView("loginold");
+		ModelAndView mv = new ModelAndView("login");
 		if (user != null) {
 			mv.setViewName("logout");
 			return mv;
